@@ -151,14 +151,31 @@ void file_write_ht()
 {
     FILE *fp;
     int count = 0;
-
+	int count = 0;
+	char ch[30];
     if((fp=fopen("output.txt","wt")) == NULL ) {
         printf("Fail to open file!\n");    
         exit(0);  
     }
 
     ////begin
-
+	for(i=0;i<1000;i++)								//这里为了保证打印文档时的美观，我们调整了一下，用空格和回车来分割; 
+    {
+    	itoa(i,ch,10);
+    	fputs("table[i]=",fp);
+    	fputs(ch,fp);
+    	fputs("    ",fp);
+    	while(table[i])
+    	{
+    		fputs(table[i]->data.name,fp);
+    		fputs("    ",fp);
+    		table[i]=table[i]->next;
+		}
+		fputc('\n',fp);
+		fputc('\n',fp);
+		fputc('\n',fp);
+	}		
+			
 
     ////end
     printf("%d\n", count);   
